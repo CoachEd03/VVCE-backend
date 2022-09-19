@@ -2,7 +2,7 @@ import Register from "./components/Register";
 function App() {
   return (
     <div className="App">
-      hello
+      hell0
       <Register />
     </div>);
 }
