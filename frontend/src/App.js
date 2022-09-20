@@ -1,8 +1,8 @@
-import Register from "./components/Register";
+import CreateMeal from "./components/meal";
 function App() {
   return (
     <div className="App">
-      <Register />
+      <CreateMeal />
     </div>);
 }
 
