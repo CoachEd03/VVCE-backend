@@ -1,5 +1,9 @@
+import Register from "./components/Home";
 function App() {
-  return <div className="App">Hello let's start working.</div>;
+  return (
+    <div className="App">
+      <Register />
+    </div>);
 }
 
 export default App;
