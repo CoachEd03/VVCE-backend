@@ -1,5 +1,4 @@
 import React,{useState} from "react";
-import Login from "./login";
 import "./Register.css";
 function Register() {
   const [register, setRegister] = useState({
@@ -15,7 +14,7 @@ function Register() {
   }
   return (
     <div className="reg">
-      <form className="get" onSubmit={(e) => saveSubmit(e)}>
+      <form onSubmit={(e) => saveSubmit(e)}>
         <b>Register form</b>
         <br />
         <label>
@@ -73,7 +72,7 @@ function Register() {
           Register
         </button>
       </form>
-      <a href={Login}> Already a member login </a>
+      <a href="./login" className="log"> Already a member login </a>
     </div>
   );
 }

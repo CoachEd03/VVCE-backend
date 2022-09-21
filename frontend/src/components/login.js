@@ -9,7 +9,7 @@ function Login() {
         console.log(login);
     }
     return (
-        <div>
+        <div className="reg">
             <form onSubmit={(e) => saveSubmit(e)}>
                 <b>Login form</b>
                 <br />
