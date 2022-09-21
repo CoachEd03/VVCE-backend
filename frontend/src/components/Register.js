@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import Login from "./login";
-import "./Register.css"
+import "./Register.css";
 function Register() {
   const [register, setRegister] = useState({
     fname: "",
@@ -15,7 +15,7 @@ function Register() {
   }
   return (
     <div className="reg">
-      <form onSubmit={(e) => saveSubmit(e)}>
+      <form className="get" onSubmit={(e) => saveSubmit(e)}>
         <b>Register form</b>
         <br />
         <label>

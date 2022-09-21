@@ -1,9 +1,23 @@
+body{
+    background-image: url("../assets/restaurant.png");
+}
 .reg{
+    display: flex;
+    justify-content: center;
     border-radius: 1rem;
     width: 25rem;
     margin: 2rem auto;
     padding: 0.5rem;
     height: 12rem;
+    flex-direction: column;
+    align-items: center;
+}
+.get {
+    display: inline-block;
+}
+b {
+    display: flex;
+    justify-content: center;
 }
 input {
     height: 0.75rem;
