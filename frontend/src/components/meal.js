@@ -1,6 +1,6 @@
 import {useState} from 'react'
 function CreateMeal() {
-    const[selection]= useState<{mealName:String,add_ingredients:[],type:String,price:Number,courseMeal:String}> ({
+    const[selection,setSelection]= useState ({
         mealName: "",
         add_ingredients:"",
         type:"",
@@ -9,11 +9,11 @@ function CreateMeal() {
     })
     function Continue(e) {
         e.preventDefault()
-        console.log("Finding the best meal option!")
+        console.log("Creating the best meal option!")
     }
     return (
         <div>
-        <form onClick={CreateMeal}>
+        <form onClick={Continue}>
             <b>MEAL SELECTION FORM</b><br/>
             <label> Meal Name: <input type="text" name="{selection.mealName}" required/>
             </label><br/>
@@ -49,5 +49,5 @@ function CreateMeal() {
         </div>);
   }
 
-export default Register;
+export default CreateMeal;
   
