@@ -1,8 +1,12 @@
-import { useState } from "react";
+import React,{useState} from "react";
+import Login from "./login";
+import "./Register.css"
 function Register() {
   const [register, setRegister] = useState({
     fname: "",
+    lname: "",
     email: "",
+    phno: "",
   });
   function saveSubmit(e) {
     e.preventDefault();
@@ -10,7 +14,7 @@ function Register() {
     // front-end api will be called here and register will be passed as body.
   }
   return (
-    <div>
+    <div className="reg">
       <form onSubmit={(e) => saveSubmit(e)}>
         <b>Register form</b>
         <br />
@@ -30,7 +34,10 @@ function Register() {
         <br />
         <label>
           {" "}
-          Last Name: <input type="text" name="lname" required />
+          Last Name: {" "} <input type="text" name="lname" value={register.lname}
+            onChange={(e) =>
+              setRegister({ ...register, lname: e.target.value })
+            } required />
         </label>
         <br />
         <label>
@@ -49,7 +56,7 @@ function Register() {
         <br />
         <label>
           {" "}
-          Ph no: <input type="number" name="phno" required />
+          Ph no: {" "} <input type="text" name="phno" value={register.phno} onChange={(e) => setRegister({...register,phno: e.target.value})} required />
         </label>
         <br />
         <label>
@@ -62,11 +69,11 @@ function Register() {
           Repeat Password: <input type="password" name="rpass" required />
         </label>
         <br />
-        <button type="submit" value="Sign UP">
+        <button type="submit" value="Submit">
           Register
         </button>
       </form>
-      {/* <a src="./login.js">Already a member login</a> */}
+      <a href={Login}> Already a member login </a>
     </div>
   );
 }

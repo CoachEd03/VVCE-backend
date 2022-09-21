@@ -1,0 +1,21 @@
+.reg{
+    background-color: rgba(197, 237, 206, 0.992);
+    border-radius: 1rem;
+    width: 25rem;
+    margin: 2rem auto;
+    padding: 0.5rem;
+    height: 12rem;
+}
+input {
+    height: 0.75rem;
+    border: 0rem;
+    align-self: auto;
+    bottom: 5rem;
+}
+button {
+    padding: 0.01rem;
+}
+a {
+    display: flex;
+    justify-content: center;
+}
