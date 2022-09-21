@@ -1,7 +1,7 @@
 body{
     background-image: url("../assets/restaurant.png");
 }
-.reg{
+form {
     display: flex;
     justify-content: center;
     border-radius: 1rem;
