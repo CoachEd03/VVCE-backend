@@ -3,7 +3,6 @@
 # dependencies
 /backend/node_modules
 /frontend/node_modules
-/frontend/src/components/Login.js
 /.pnp
 .pnp.js
 
