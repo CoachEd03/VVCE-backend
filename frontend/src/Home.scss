@@ -1,36 +1,38 @@
-.HomeContainer {
-    position: relative;
-  }
-  .HomeContainer img   {
-    height: 80vh;
-    width: 100vw;
-    background-repeat: no repeat;
-    background-size: contain;
-  }
-  .InviteContainer  {
-    position: absolute;
-    top: 20vh;
-    left: 25vw;
-    text-align: center;
-  }
-  .InviteContainer h2{
-    color: white;
-    font-family: cursive;
-    font-style: italic;
-    font-size: 2.5rem;
-    
-  }
-  .InviteContainer h1{
-    color: white;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 2.7rem;
-    margin-bottom: 45px;
-  }
-  .InviteContainer button{
-    color: white;
-    background-color: transparent;
-    font-size: 1.5rem;
-    padding: 0.5rem 1rem 0.5rem 1rem;
-    border: 5px solid white;
-    
-  }
+body{
+  background-image: url("../assets/restaurant.png");
+}
+.reg {
+  align-self: center;
+  margin: 8rem auto;
+  padding: 0.5rem;
+  background-color: rgba(0,0,0,0.5);
+  background-size: 0.5rem auto;
+}
+form {
+  display: flex;
+  justify-content: center;
+  border-radius: 1rem;
+  flex-direction: column;
+  align-items: center;
+}
+
+b {
+  display: flex;
+  justify-content: center;
+}
+input {
+  height: 0.75rem;
+  border: 0rem;
+  align-self: auto;
+  bottom: 5rem;
+}
+button {
+  padding: 0.1rem;
+  border: 0rem;
+  background-color: yellowgreen;
+}
+.log {
+  display: flex;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.737);
+}
