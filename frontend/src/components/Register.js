@@ -6,10 +6,18 @@ function Register() {
     lname: "",
     email: "",
     phno: "",
+    pass: "",
+    rpass: "",
   });
   function saveSubmit(e) {
     e.preventDefault();
-    console.log(register);
+    if(register.pass === register.rpass){
+      console.log(register);
+      
+    }
+    else {
+      alert("Different passwords");
+    }
     // front-end api will be called here and register will be passed as body.
   }
   return (
@@ -60,12 +68,12 @@ function Register() {
         <br />
         <label>
           {" "}
-          Password: <input type="password" name="pass" required />
+          Password: <input type="password" name="pass" value={register.pass} onChange={(e) => setRegister({...register,pass: e.target.value})} required />
         </label>
         <br />
         <label>
           {" "}
-          Repeat Password: <input type="password" name="rpass" required />
+          Repeat Password: <input type="password" name="rpass" value={register.rpass} onChange={(e) => setRegister({...register,rpass: e.target.value})} required />
         </label>
         <br />
         <button type="submit" value="Submit">
