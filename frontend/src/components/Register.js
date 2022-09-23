@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import "./Register.scss";
 function Register() {
   const [register, setRegister] = useState({
@@ -11,14 +11,28 @@ function Register() {
   });
   function saveSubmit(e) {
     e.preventDefault();
-    if(register.pass === register.rpass){
+    if (register.pass === register.rpass) {
       console.log(register);
-
-    }
-    else {
+    } else {
       alert("Different passwords");
     }
     // front-end api will be called here and register will be passed as body.
+    callRegisterApi();
+  }
+
+  async function callRegisterApi() {
+    await fetch("http://localhost:5001/api/register", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(register),
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
   }
   return (
     <div className="reg">
@@ -41,10 +55,16 @@ function Register() {
         <br />
         <label>
           {" "}
-          Last Name: {" "} <input type="text" name="lname" value={register.lname}
+          Last Name:{" "}
+          <input
+            type="text"
+            name="lname"
+            value={register.lname}
             onChange={(e) =>
               setRegister({ ...register, lname: e.target.value })
-            } required />
+            }
+            required
+          />
         </label>
         <br />
         <label>
@@ -63,24 +83,50 @@ function Register() {
         <br />
         <label>
           {" "}
-          Ph no: {" "} <input type="text" name="phno" value={register.phno} onChange={(e) => setRegister({...register,phno: e.target.value})} required />
+          Ph no:{" "}
+          <input
+            type="text"
+            name="phno"
+            value={register.phno}
+            onChange={(e) => setRegister({ ...register, phno: e.target.value })}
+            required
+          />
         </label>
         <br />
         <label>
           {" "}
-          Password: <input type="password" name="pass" value={register.pass} onChange={(e) => setRegister({...register,pass: e.target.value})} required />
+          Password:{" "}
+          <input
+            type="password"
+            name="pass"
+            value={register.pass}
+            onChange={(e) => setRegister({ ...register, pass: e.target.value })}
+            required
+          />
         </label>
         <br />
         <label>
           {" "}
-          Repeat Password: <input type="password" name="rpass" value={register.rpass} onChange={(e) => setRegister({...register,rpass: e.target.value})} required />
+          Repeat Password:{" "}
+          <input
+            type="password"
+            name="rpass"
+            value={register.rpass}
+            onChange={(e) =>
+              setRegister({ ...register, rpass: e.target.value })
+            }
+            required
+          />
         </label>
         <br />
         <button type="submit" value="Submit">
           Register
         </button>
       </form>
-      <a href="./login" className="log"> Already a member login </a>
+      <a href="./login" className="log">
+        {" "}
+        Already a member login{" "}
+      </a>
     </div>
   );
 }
