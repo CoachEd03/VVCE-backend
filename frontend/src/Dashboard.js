@@ -13,7 +13,9 @@ export default function Home() {
         <h1 className="InviteContainer__subHeading">
           Welcome to "Deeplight Restaurant"
         </h1>
-        <button>Reservation</button>
+        <button type="submit" value="Submit">
+          Reservation
+        </button>
       </div>
 
       <div className="AboutContainer">
