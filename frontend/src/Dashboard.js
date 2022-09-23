@@ -1,9 +1,18 @@
-function Dashboard() {
+import React from "react";
+import MainPic from "./assets/restaurant.jpeg";
+
+function Home() {
   return (
-    <div>
-      <h1 className="center"> Hello, Welcome to Dashboard :)</h1>
+    <div className="HomeContainer">
+      <img alt="introHomeImage" src={MainPic} />
+
+      <div className="InviteContainer">
+        <h2>delightful experiences</h2>
+        <h1>Welcome to "Deeplight Restaurant"</h1>
+        <button>Reservation</button>
+      </div>
     </div>
   );
 }
 
-export default Dashboard;
+export default Home;
