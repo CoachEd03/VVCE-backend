@@ -3,6 +3,7 @@ import "./Register.scss";
 function Login() {
     const [login, setLogin] = useState({
       email: "",
+      pass: "",
     });
     function saveSubmit(e) {
         e.preventDefault();
@@ -29,7 +30,10 @@ function Login() {
                 <br />
                 <label>
                     {" "}
-                    Password: <input type="password" name="pass" required />
+                    Password: <input type="password" name="pass" value={login.pass}
+                        onChange={(e) =>
+                        setLogin({ ...login, pass: e.target.value })
+                        } required />
                 </label>
                 <br />
                 <button type="submit" value="Submit">
