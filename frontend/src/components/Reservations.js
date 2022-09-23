@@ -7,12 +7,7 @@ function Reservation() {
     Phonenumber: "",
     Email: "",
   });
-  function saveSubmit(e) {
-    e.preventDefault();
-      console.log(reservation);
-      alert("Different passwords")
-    // front-end api will be called here and register will be passed as body.
-  }
+
   return (
     <div className="reg">
       <form onSubmit={(e) => saveSubmit(e)}>
@@ -67,19 +62,7 @@ function Reservation() {
             type="Number"
             name="Phonenumber"
             value={reservation.phno}
-            onChange={(e) => setRegister({ ...register, phno: e.target.value })}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          {" "}
-          Password:{" "}
-          <input
-            type="password"
-            name="pass"
-            value={register.pass}
-            onChange={(e) => setRegister({ ...register, pass: e.target.value })}
+            onChange={(e) => setReservation({ ...reservation, phoneumber: e.target.value })}
             required
           />
         </label>
