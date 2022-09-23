@@ -6,8 +6,12 @@ const port = 5001;
 
 app.use(bodyParser.json());
 app.use(cors());
-app.get("/", (req, res) => {
-  res.send("Hello World!");
+app.post("/register", (req, res) => {
+  res.send("Received Register");
+});
+
+app.post("/login", (req, res) => {
+  res.send("Received login");
 });
 
 app.listen(port, () => {
