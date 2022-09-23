@@ -13,7 +13,7 @@ function Register() {
     e.preventDefault();
     if(register.pass === register.rpass){
       console.log(register);
-      
+
     }
     else {
       alert("Different passwords");
