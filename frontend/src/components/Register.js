@@ -13,11 +13,11 @@ function Register() {
     e.preventDefault();
     if (register.pass === register.rpass) {
       console.log(register);
+      callRegisterApi();
     } else {
       alert("Different passwords");
     }
     // front-end api will be called here and register will be passed as body.
-    callRegisterApi();
   }
 
   async function callRegisterApi() {
