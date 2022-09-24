@@ -7,11 +7,14 @@ router.get("/", (req, res) => {
 });
 
 router.post("/register", (req, res) => {
+  console.log("\nRegister page : ");
   console.log(req.body);
   res.send("Received Register");
 });
 
 router.post("/login", (req, res) => {
+  console.log("\nLogin page : ");
+  console.log(req.body);
   res.send("Received login");
 });
 

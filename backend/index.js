@@ -11,15 +11,6 @@ app.use(cors());
 
 app.use("/api", router);
 
-app.post("/Register", (req, res) => {
-  res.send("Received Register");
-});
-
-app.post("/login", (req, res) => {
-  res.send("Received login");
-});
-
-
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
