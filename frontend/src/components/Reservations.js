@@ -7,7 +7,25 @@ function Reservation() {
     Phonenumber: "",
     Email: "",
   });
-
+  function saveSubmit(e) {
+    e.preventDefault();
+      console.log(reservation);
+    callReservationApi();
+  }
+  async function callReservationApi() {
+    await fetch("http://localhost:5001/api/reservation", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(reservation),
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  }
   return (
     <div className="reg">
       <form onSubmit={(e) => saveSubmit(e)}>
