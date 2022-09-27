@@ -1,7 +1,6 @@
 import express from "express";
 import Reservation from "../../frontend/src/components/Reservations";
 
-
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -20,7 +19,7 @@ router.post("/login", (req, res) => {
 router.post("/reservation", (req, res) => {
   console.log("/nReservation Page : ");
   console.log(req.body);
-  const n = new ReservationSchema(req.body);
+  const n = new Reservation(req.body);
   n.save();
   res.send("Received Reservation");
 });
