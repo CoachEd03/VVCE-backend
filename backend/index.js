@@ -1,15 +1,34 @@
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const express = require("express");
+import bodyParser from "body-parser";
+import cors from "cors";
+import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import router from "./routes/routes.js";
 const app = express();
-const port = 5001;
-
+const port = process.env.PORT || 5001;
+dotenv.config();
 app.use(bodyParser.json());
 app.use(cors());
-app.post("/meal", (req, res) => {
-  res.send("received meal form");
-});
+
+app.use("/api", router);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
+
+mongoose
+  .connect(process.env.MONGO_CONNECTION_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then((response) => {
+    app.listen(port, () => console.log(` SERVER STARTED AT PORT: ${port} `));
+  })
+  .catch((error) => {
+    console.log("Error connecting database", error.message);
+  });
+
+// mongoose.set("useFindAndModify", false);
+// app.listen(port, () => {
+//   console.log(`Example app listening on port ${port}`);
+// });

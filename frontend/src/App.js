@@ -1,5 +1,5 @@
 import Register from "./components/Register";
-import Login from "./components/Login";
+import Login from "./components/login";
 import Reservation from "./components/Reservations";
 import Dashboard from "./Dashboard";
 import Navbar from "./Navbar";
