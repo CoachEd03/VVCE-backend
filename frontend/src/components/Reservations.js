@@ -4,8 +4,8 @@ function Reservation() {
   const [reservation, setReservation] = useState({
     numberofguests: "",
     Guestsname: "",
-    Phonenumber: "",
     Email: "",
+    Phonenumber: "",
   });
   function saveSubmit(e) {
     e.preventDefault();
@@ -80,7 +80,7 @@ function Reservation() {
             type="Number"
             name="Phonenumber"
             value={reservation.phno}
-            onChange={(e) => setReservation({ ...reservation, phoneumber: e.target.value })}
+            onChange={(e) => setReservation({ ...reservation, Phonenumber: e.target.value })}
             required
           />
         </label>
