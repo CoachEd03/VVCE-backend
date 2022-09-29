@@ -20,8 +20,9 @@ function Login() {
           body: JSON.stringify(login),
         })
           .then((res) => {
-            console.log(res.json());
+            return res.text();
           })
+          .then ((r) => alert(r))
           .catch((err) => console.log(err));
       }
     return (

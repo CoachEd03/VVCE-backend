@@ -30,8 +30,9 @@ function Register() {
       body: JSON.stringify(register),
     })
       .then((res) => {
-        console.log(res);
+        return res.text();
       })
+      .then((r) => alert(r))
       .catch((err) => console.log(err));
   }
   return (
