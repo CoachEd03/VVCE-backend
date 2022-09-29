@@ -10,20 +10,25 @@ router.get("/", (req, res) => {
 router.post("/register", (req, res) => {
   console.log("\nRegister page : ");
   console.log(req.body);
-  Register.find({email : req.body.email}, function (err, docs) {
-    if (err){
-        console.log(err);
-    }
-    else{
-      if(docs.length == 0) {
-        const n = new Register(req.body);
-        n.save();
-        res.send("Register successfull ");
+  if(req.body.phno.length == 10 ) {
+    Register.find({email : req.body.email}, function (err, docs) {
+      if (err){
+          console.log(err);
       }
       else{
-        res.send("Email exists");
-      }
-    }});
+        if(docs.length == 0) {
+          const n = new Register(req.body);
+          n.save();
+          res.send("Register successfull ");
+        }
+        else{
+          res.send("Email exists");
+        }
+      }});
+  }
+  else {
+    res.send("invalid phone number")
+  }
 });
 
 router.post("/login", (req, res) => {
