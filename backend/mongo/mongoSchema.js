@@ -1,17 +1,18 @@
 import mongoose from "mongoose";
 
-const user = mongoose.Schema ({
-    fname: String,
-    lname: String,
-    email: String,
-    pass : String,
-    phno : Number,
+//import Reservation from "../../frontend/src/components/Reservations";
+
+const user = mongoose.Schema( {
+    numberofguests: Number,
+    Guestsname: String,
+    Email: String,
+    Phonenumber: Number,
     createdAt: {
-        type : Date,
-        default : new Date(),
+        type: Date,
+        default: new Date(),
     },
 });
 
-const Register = mongoose.model("Register",user);
+const ReservationSchema = mongoose.model("Reservation", user);
 
-export default Register;
+
