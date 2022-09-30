@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 //import Reservation from "../../frontend/src/components/Reservations";
 
 const user = mongoose.Schema( {
@@ -14,4 +15,4 @@ const user = mongoose.Schema( {
 
 const ReservationSchema = mongoose.model("Reservation", user);
 
-export default ReservationSchema;
+
