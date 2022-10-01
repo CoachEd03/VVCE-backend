@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const meal=mongoose.Schema({
+const user=mongoose.Schema({
         mealName: String,
         ingr1:String,
         ingr2:String,
@@ -12,5 +12,5 @@ const meal=mongoose.Schema({
         },
 });
 
-const MealSchema=mongoose.model("meal",user);
-export default MealSchema;
+const mealSchema=mongoose.model("meal",user);
+export default mealSchema;

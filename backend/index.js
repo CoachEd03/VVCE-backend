@@ -12,9 +12,6 @@ app.use(cors());
 
 app.use("/api", router);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
 
 mongoose
   .connect(process.env.MONGO_CONNECTION_URL, {
