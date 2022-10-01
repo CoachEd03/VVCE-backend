@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import "./meal_style.scss";
+//import "./meal_style.scss";
 function CreateMeal() {
     const[meal,setMeal]= useState ({ 
         mealName: "",
@@ -45,7 +45,7 @@ function CreateMeal() {
             <label>
                 {" "}
                 Main Ingredient: {" "}</label><br/>
-            <select name={meal.ingr1}>
+            <select name={meal.ingr1} value={meal.ingr1}>
                 <option>Chicken</option>
                 <option>Mutton</option>
                 <option>Paneer</option>
