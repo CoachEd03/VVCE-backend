@@ -34,6 +34,15 @@ function Register() {
       })
       .then((r) => alert(r))
       .catch((err) => console.log(err));
+    
+      setRegister({
+      fname: "",
+      lname: "",
+      email: "",
+      phno: "",
+      pass: "",
+      rpass: "",
+    });
   }
   return (
     <div className="reg">
