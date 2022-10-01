@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
-//import Reservation from "../../frontend/src/components/Reservations";
 
+const mydate = new Date();
 const user = mongoose.Schema( {
     numberofguests: Number,
     Guestsname: String,
     Email: String,
     Phonenumber: Number,
     createdAt: {
-        type: Date,
-        default: new Date(),
+        type: String,
+        default: mydate.toISOString().substring(0, 10),
     },
 });
 
