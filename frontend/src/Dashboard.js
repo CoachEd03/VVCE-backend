@@ -1,6 +1,7 @@
 import React from "react";
 import MainPic from "./assets/Fav.jpg";
 import AboutPic from "./assets/tables.png";
+import MessageBox from "./components/Message/MessageBox";
 
 export default function Home() {
   return (
@@ -33,6 +34,10 @@ Menufy builds free brand-based online ordering websites for our restaurant partn
         </p>
         <button className="AboutContainer__ReadMorebutton">Read More</button>
         <div className="AboutContainer__Redline"></div>
+      </div>
+       <div>
+        {" "}
+        <MessageBox />
       </div>
     </div>
   );
