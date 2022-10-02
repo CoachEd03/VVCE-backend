@@ -20,6 +20,7 @@ function Navbar() {
           <CustomLink to="/createMeal" name="Create Meal">
             createMeal
           </CustomLink>
+          <CustomLink to="/message" name="Messages"></CustomLink>
         </ul>
       </nav>
     </div>
