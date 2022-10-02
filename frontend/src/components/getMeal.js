@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import "./meal_style.scss";
+
 function getMeal() {
     const[meal,getMeal]= useState ({ 
         mealName: "",
@@ -29,13 +30,13 @@ async function getMealApi() {
       .catch((err) => console.log(err));
   }
   return (
-    <body>
+    
     <div>   
     <form onClick={(e) => Continue(e)}>
     </form>
         </div>
         
-        </body>);
+        );
   }
 
 export default CreateMeal;
