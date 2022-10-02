@@ -1,9 +1,9 @@
-import Register from "./components/Register";
-import Login from "./components/login";
-import Reservation from "./components/Reservations";
+import Register from "./components/registerLogin/Register";
+import Login from "./components/registerLogin/login";
+import Reservation from "./components/reservations/Reservations";
 import Dashboard from "./Dashboard";
 import Navbar from "./Navbar";
-import CreateMeal from "./components/meal";
+import CreateMeal from "./components/meals/meal";
 
 import { Route, Routes } from "react-router-dom";
 import "./styles.scss";

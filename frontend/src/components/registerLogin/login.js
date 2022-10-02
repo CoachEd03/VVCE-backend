@@ -1,10 +1,12 @@
 import React,{useState} from "react";
+import { Link } from "react-router-dom";
 import "./Register.scss";
 function Login() {
     const [login, setLogin] = useState({
       email: "",
       pass: "",
     });
+    const [isAuth, setIsAuth] = useState(false);
     function saveSubmit(e) {
         e.preventDefault();
         console.log(login);
@@ -22,7 +24,15 @@ function Login() {
           .then((res) => {
             return res.text();
           })
-          .then ((r) => alert(r))
+          .then ((r) => {
+            if(r === 'login successfull'){
+              setIsAuth(true)
+              console.log(isAuth);
+            }
+            else{
+              alert(r)
+            }
+          })
           .catch((err) => console.log(err));
       }
     return (
@@ -54,7 +64,8 @@ function Login() {
                 <br />
                 <button type="submit" value="Submit">
                     Login
-                </button>
+                </button> <p>{isAuth}</p>
+                {isAuth?<Link to="/"></Link>:<Link to="/register"></Link>}
             </form>
         </div>);
 }

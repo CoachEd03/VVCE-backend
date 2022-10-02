@@ -2,6 +2,7 @@ import express from "express";
 import mealSchema from "../mongo/mealSchema.js";
 import ReservationSchema from "../mongo/reservationSchema.js";
 import Register from "../mongo/registerSchema.js";
+import message from "../mongo/messageSchema.js";
 
 const router = express.Router();
 
@@ -11,7 +12,8 @@ router.post("/meal", (req, res) => {
   const n = new mealSchema(req.body);
   n.save();
   res.send("Received meal form");});
-  router.post("/register", (req, res) => {
+
+ router.post("/register", (req, res) => {
     if (req.body.phno.length == 10) {
       Register.find({ email: req.body.email }, function (err, docs) {
         if (err) {
@@ -86,6 +88,14 @@ router.post("/meal", (req, res) => {
       }
     });
   });
+
+router.post("/messages", (req,res) => {
+  const sample = new message({
+    title : "test",
+    message : "test",
+  })
+  sample.save();
+});
 
 
   export default router
