@@ -17,6 +17,9 @@ function Navbar() {
           <CustomLink to="/reservation" name="Reservation">
             Reservation
           </CustomLink>
+          <CustomLink to="/createMeal" name="Create Meal">
+            createMeal
+          </CustomLink>
         </ul>
       </nav>
     </div>

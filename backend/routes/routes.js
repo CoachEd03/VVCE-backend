@@ -15,26 +15,26 @@ router.post("/login", (req, res) => {
   res.send("Received login");
 });
 
-router.post("/Reservation", (req, res) => {
-  console.log("/Reservation Page : ");
-  console.log(req.body);
-  const n = new ReservationSchema(req.body);
-  n.save();
-  let count = 0;
-  ReservationSchema.find({}, function (err, docs) {
-    if (err) {
-        console.log(err);
+router.post("/reservation", (req, res) => {
+  const newReservation = new ReservationSchema(req.body);
+  Register.find({ Email: req.body.email }, function (err, docs) {
+    console.log(docs.length);
+    if (!docs.length) {
+      newReservation.save((err, data) => {
+        console.log("Analyzing Data...");
+        if (data) {
+          console.log("Your data has been successfully saved.");
+          res.send("Successful booking");
+        } else {
+          console.log("Something went wrong while saving data.");
+          console.log(err);
+          res.status(404).send("Something went wrong while saving data.");
+        }
+      });
+    } else {
+      res.status(404).send("The booking from this email already exist");
     }
-  else {
-    for(let i = 0; i<docs.length; i++) {
-      if(Date().toString().substring(0, 10)==docs[i].createdAt)
-      count++;
-    }
-  }
-  })
-console.log(count)
-  res.send("Received Reservation");
+  });
 });
-
 
 export default router;

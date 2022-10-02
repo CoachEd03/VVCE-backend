@@ -12,6 +12,7 @@ app.use(cors());
 
 app.use("/api", router);
 
+
 mongoose
   .connect(process.env.MONGO_CONNECTION_URL, {
     useNewUrlParser: true,
