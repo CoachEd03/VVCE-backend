@@ -11,7 +11,7 @@ router.post("/postMessages", (request, response) => {
 
 router.get("/getMessages", (request, response) => {
   console.log(request.body)
-  response.send("getMessages")
+  response.send([{ id: 1, title: "hey message", message: "i am message " }])
 });
 
 router.get("/updateMessages", (request, response) => {
