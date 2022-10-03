@@ -13,24 +13,29 @@ export default function Message() {
       .then((res) => setIsMessage(res))
       .catch((err) => console.log("Error in sending messages", err));
   }, []);
-
+  async function deleteMessage(id) {
+    const url = "http://localhost:5001/api/delete";
+    await fetch(url+"/"+id).then((res)=> console.log("delete")).catch((err) => console.log(err));
+  }
   async function updateMessage(id, title, message) {
     console.log("update", id);
     setData({ id, title, message });
     let editMessage = isMessage.find((ele) => ele.id !== id);
     console.log(editMessage);
     console.log("data", data);
-    // await fetch("http://localhost:5001/api/updateMessages", {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(isMessage),
-    // })
-    //   .then((response) => response.text())
-    //   .then((res) => alert(res))
-    //   .catch((err) => console.log("Error in sending messages", err));
+
+    await fetch("http://localhost:5001/api/updateMessages", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(isMessage),
+    })
+      .then((response) => response.text())
+      .then((res) => alert(res))
+      .catch((err) => console.log("Error in sending messages", err));
+
     setShowPopup(true);
   }
 
@@ -64,6 +69,7 @@ export default function Message() {
             <button
               className="messages__button"
               style={{ backgroundColor: "rgb(173, 30, 30)" }}
+              onClick={() => deleteMessage(mess._id)}
             >
               Delete
             </button>
