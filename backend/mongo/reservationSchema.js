@@ -9,10 +9,12 @@ const user = mongoose.Schema({
     unique: true,
   },
   Phonenumber: Number,
+  ReservationDate: String,
   createdAt: {
     type: Date,
     default: new Date(),
   },
+
 });
 
 const ReservationSchema = mongoose.model("Reservation", user);
