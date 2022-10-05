@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import "./home.scss";
-import DatePicker from "react";
 function Reservation() {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
   const [reservation, setReservation] = useState({
     numberofguests: "",
     Guestsname: "",
     Email: "",
     Phonenumber: "",
-    Reservationdate: "",
   });
   function saveSubmit(e) {
     e.preventDefault();
@@ -92,38 +88,21 @@ function Reservation() {
           />
         </label>
         <br />
-        <div className="col-sm-12 my-2">
-        <label htmlFor="startDate">ReservationDate : </label>
-        <input
-          type="date"
-          className="form-control"
-          id="startDate"
-          onChange={(e) => setReservation({ ...reservation, From : e.target.value })}
-        />
-      </div>
-      <br/>
-      <br />
         <button type="submit" value="Submit">
           Reservation
         </button>
       </form>
       <div>
-     <DatePicker
-       selected={startDate}
-       selectsStart
-       startDate={startDate}
-       endDate={endDate}
-       onChange={date => setStartDate(date)}
-     />
-     <DatePicker
-       selected={endDate}
-       selectsEnd
-       startDate={startDate}
-       endDate={endDate}
-       minDate={startDate}
-       onChange={date => setEndDate(date)}
-     />
-   </div>
+  <select class="browser-default custom-select" id="venflows">
+    <option value="Date">ALL</option>
+    <option value="Date">Today</option>
+    <option value="Date">Tomorrow</option>
+  </select>
+</div>
+<button type="button"
+onclick="document.getElementById('date_time_button').innerHTML = Date()">Check</button>
+<p id="date_time_button"></p>
+
     </div>
   );
 }
