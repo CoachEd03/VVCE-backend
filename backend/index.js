@@ -4,6 +4,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import router from "./routes/routes.js";
+import messageRouter from "./routes/messageRoute.js";
 const app = express();
 const port = process.env.PORT || 5001;
 dotenv.config();
@@ -11,7 +12,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use("/api", router);
-
+app.use("/api", messageRouter);
 
 mongoose
   .connect(process.env.MONGO_CONNECTION_URL, {
