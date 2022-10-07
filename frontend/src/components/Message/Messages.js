@@ -6,6 +6,7 @@ export default function Message() {
   const [isMessage, setIsMessage] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [data, setData] = useState({});
+  const [id,setId] = useState("")
   useEffect(() => {
     // Update the messge using the browser API
     fetch("http://localhost:5001/api/getMessages")
@@ -16,26 +17,15 @@ export default function Message() {
   async function deleteMessage(id) {
     const url = "http://localhost:5001/api/delete";
     await fetch(url+"/"+id).then((res)=> console.log("delete")).catch((err) => console.log(err));
+    window.location.reload();
   }
   async function updateMessage(id, title, message) {
     console.log("update", id);
-    setData({ id, title, message });
-    let editMessage = isMessage.find((ele) => ele.id !== id);
-    console.log(editMessage);
-    console.log("data", data);
-
-    await fetch("http://localhost:5001/api/updateMessages", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(isMessage),
-    })
-      .then((response) => response.text())
-      .then((res) => alert(res))
-      .catch((err) => console.log("Error in sending messages", err));
-
+    // setData({ id, title, message });
+    // let editMessage = isMessage.find((ele) => ele.id !== id);
+    // console.log(editMessage);
+    // console.log("data", data);
+    setId(id);
     setShowPopup(true);
   }
 
@@ -43,9 +33,12 @@ export default function Message() {
     <div>
       {showPopup ? (
         <MessageBox
+          id={id}
+          setId = {setId}
           showPopup={showPopup}
           setShowPopup={setShowPopup}
           data={data}
+          setData = {setData}
         />
       ) : (
         ""
