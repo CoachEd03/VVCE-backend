@@ -77,17 +77,27 @@ router.post("/register", (req, res) => {
        else response.send("Deleted data");
      });
   });
-  router.delete("/updateReservation", (request, response) => {
-    const id = request.query.id;
-   console.log("Update"+id);
-    ReservationSchema.findByIdAndUpdate({ _id: id }, (err, docs) => {
-      if (err) response.send(" Error in saving data " + err);
-      else response.send("Updated data");
-    });
- });
+  router.put("/updateReservation",(req,res)=>{
+    const id=req.query.id;
+    console.log(id);
+    console.log(req.body);
+    const { numberofguests,Guestsname,Email,Phonenumber } = req.body;
+    console.log ( numberofguests,Guestsname,Email,Phonenumber);
+    ReservationSchema.findByIdAndUpdate({_id:id},req.body,(err,docs) =>{
+      if (err) res.send(" Error in saving data " + err);
+      else res.send("updated data");
+    })
+  })
+  router.post("/reservation", (req, res) => {
+    console.log("\nReservation page");
+    console.log(req.body);
+    const n = new ReservationSchema(req.body);
+    n.save();
+    res.send("Received reservation form");
+  });
   router.post("/reservation", (req, res) => {
     const newReservation = new ReservationSchema(req.body);
-    Register.find({ Email: req.body.email }, function (err, docs) {
+    ReservationSchema.find({ Email: req.body.email }, function (err, docs) {
       console.log(docs.length);
       if (docs.length) {
         newReservation.save((err, data) => {

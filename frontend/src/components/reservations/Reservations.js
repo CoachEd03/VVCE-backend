@@ -20,6 +20,30 @@ const [reservation, setReservation] = useState({
     callReservationApi();
   }
 
+
+  async function updateReservation(e) {
+    e.preventDefault()
+
+    console.log(reservation);
+    try{
+      await fetch("http://localhost:5001/api/updateReservation?id="+id,{
+        method:"PUT",
+        headers:{
+          Accept:"application/json",
+          "Content-Type":"application?json",
+        },
+        body: JSON.stringify(reservation),
+      }).then((res)=> 
+      console
+      .log(res.text())
+      .catch((err) => console.log("error:"+err))
+      );
+   
+  }catch (err){
+    console.log("Some error",err);
+  }
+ // setMessageData([id,mealName,ingr1,ingr2,type,price,courseMeal]);
+}
 async function deleteMessage(id,numberofguests,Guestsname,Email,Phonenumber) {
   console.log(id,numberofguests,Guestsname,Email,Phonenumber);
   try{
@@ -39,50 +63,7 @@ async function deleteMessage(id,numberofguests,Guestsname,Email,Phonenumber) {
 }
 setMessageData([id,numberofguests,Guestsname,Email,Phonenumber]);
 }
-async function updateMessage(id,numberofguests,Guestsname,Email,Phonenumber) {
-  console.log(id,numberofguests,Guestsname,Email,Phonenumber);
-  try{
-    await fetch("http://localhost:5001/api/updateReservation?id="+id,{
-      method:"PUT",
-      headers:{
-        Accept:"application/json",
-        "Content-Type":"application?json",
-      },
-    }).then((res)=> 
-    console
-    .log(res.text())
-    .catch((err) => console.log("error:"+err))
-    );
-}catch (err){
-  console.log("Some error",err);
-}
-setMessageData([id,numberofguests,Guestsname,Email,Phonenumber]);
-}
-async function handleMessage(e) {
-  e.preventDefault();
-  // console.log("showPopup", showPopup);
-  await fetch("http://localhost:5001/api/updateMessages", {
-    method: "PUT",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(reservation),
-  })
-    .then((response) => response.text())
-    .then((res) => {
-      alert("Thanks for the message");
-      // setShowPopup(!showPopup);
-    })
-    .catch((err) => console.log("Error in sending messages", err));
 
-  setIsMessage({
-    numberofguests: "",
-    Guestsname: "",
-    Email: "",
-    Phonenumber: "",
-  });
-}
 function getData(e) {
   e.preventDefault()
   console.log(reservation)
@@ -122,8 +103,8 @@ async function updateMessage(id,numberofguests,Guestsname,Email,Phonenumber) {
   let editReservation = editReservation.find((ele) => ele.id !== id);
   console.log(editReservation);
   console.log("reservation", messagedata);
-   await fetch("http://localhost:5001/api/updateMessages", {
-       method: "POST",
+   await fetch("http://localhost:5001/api/updateMessage", {
+       method: "PATCH",
        headers: {
          Accept: "application/json",
          "Content-Type": "application/json",
@@ -154,7 +135,7 @@ async function updateMessage(id,numberofguests,Guestsname,Email,Phonenumber) {
   }
   return (
     <div className="reg">
-      <form onSubmit={(e) => saveSubmit(e)}>
+      <form onSubmit={(e) => saveSubmit(e)} >
         <b>Reservation form</b>
         <br />
         <label>
@@ -250,8 +231,10 @@ async function updateMessage(id,numberofguests,Guestsname,Email,Phonenumber) {
         </div>
       ))}
     </div>
+    <br />
+    
     <div className="message">
-      <form className="message__flex" onSubmit={(e) => handleMessage(e)}>
+    <form onSubmit={(e) =>id?updateReservation(e): saveSubmit(e) }>
         <h2>
           <i>- - - - - Update - - - - - </i>
         </h2>
