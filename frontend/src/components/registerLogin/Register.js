@@ -12,7 +12,6 @@ function Register() {
   function saveSubmit(e) {
     e.preventDefault();
     if (register.pass === register.rpass) {
-      console.log(register);
       callRegisterApi();
     } else {
       alert("Different passwords");
@@ -34,8 +33,8 @@ function Register() {
       })
       .then((r) => alert(r))
       .catch((err) => console.log(err));
-    
-      setRegister({
+
+    setRegister({
       fname: "",
       lname: "",
       email: "",

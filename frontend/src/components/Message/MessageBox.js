@@ -1,12 +1,12 @@
 import { useState } from "react";
 import "./message.scss";
-export default function MessageBox() {
-  const [isMessage, setIsMessage] = useState({
-    title: "",
-    message: "",
-  });
-
-  // useEffect(()=>{setIsMessage(data)},data)
+export default function MessageBox({ ...props }) {
+  const [isMessage, setIsMessage] = useState(
+    props.data || {
+      title: "",
+      message: "",
+    }
+  );
 
   /**
    * @params event triggered on Submit click
@@ -14,8 +14,9 @@ export default function MessageBox() {
    */
   async function handleMessage(e) {
     e.preventDefault();
-    // console.log("showPopup", showPopup);
-    await fetch("http://localhost:5001/api/postMessages", {
+    let url = "http://localhost:5001/api/postMessages";
+    url = props.id ? url + "?id=" + props.id : url;
+    await fetch(url, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -26,7 +27,7 @@ export default function MessageBox() {
       .then((response) => response.text())
       .then((res) => {
         alert("Thanks for the message");
-        // setShowPopup(!showPopup);
+        props.setShowPopup(false);
       })
       .catch((err) => console.log("Error in sending messages", err));
 
@@ -34,6 +35,7 @@ export default function MessageBox() {
       title: "",
       message: "",
     });
+    // window.location.reload();
   }
 
   return (
