@@ -48,7 +48,7 @@ router.post("/meal", (req, res) => {
           resu = "invalid email";
         } else {
           if (docs[0].pass === req.body.pass) {
-            console.log("login successfull");
+            console.log("login successfull"+"\t"+docs[0]._id);
             resu = "login successfull";
           } else {
             console.log("login password error");
@@ -71,7 +71,7 @@ router.post("/meal", (req, res) => {
     const newReservation = new ReservationSchema(req.body);
     Register.find({ Email: req.body.email }, function (err, docs) {
       console.log(docs.length);
-      if (!docs.length) {
+      if (docs.length) {
         newReservation.save((err, data) => {
           console.log("Analyzing Data...");
           if (data) {
@@ -89,13 +89,13 @@ router.post("/meal", (req, res) => {
     });
   });
 
-router.post("/messages", (req,res) => {
-  const sample = new message({
-    title : "test",
-    message : "test",
-  })
-  sample.save();
-});
+// router.post("/messages", (req,res) => {
+//   const sample = new message({
+//     title : "test",
+//     message : "test",
+//   })
+//   sample.save();
+// });
 
 
   export default router
