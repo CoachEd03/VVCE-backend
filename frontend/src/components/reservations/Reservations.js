@@ -1,17 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./home.scss";
-function Reservation() {
+
+export default function Reservation() {
+  const [isMessage, setIsMessage] = useState([]);
+  //managing current data and manipulations to get latest data
+  const [messagedata, setMessageData] = useState({});
+  const [id, setID] = useState("");
+  // managing form data...
   const [reservation, setReservation] = useState({
     numberofguests: "",
     Guestsname: "",
     Email: "",
     Phonenumber: "",
   });
+
+  useEffect(() => {
+    getReservationApi();
+  }, [messagedata]);
+
   function saveSubmit(e) {
     e.preventDefault();
-      console.log(reservation);
     callReservationApi();
   }
+
+  async function deleteMessage(
+    id,
+    numberofguests,
+    Guestsname,
+    Email,
+    Phonenumber
+  ) {
+    try {
+      await fetch("http://localhost:5001/api/deleteReservation?id=" + id, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application?json",
+        },
+      }).then((res) =>
+        console.log(res.text()).catch((err) => console.log("error:" + err))
+      );
+    } catch (err) {
+      console.log("Some error", err);
+    }
+  }
+
+  function getData(e) {
+    e.preventDefault();
+    getReservationApi();
+  }
+  //get all the data
+  async function getReservationApi() {
+    await fetch("http://localhost:5001/api/reservation")
+      .then((response) => response.json())
+      .then((res) => setIsMessage(res))
+      .catch((err) => console.log(err));
+  }
+
   async function callReservationApi() {
     await fetch("http://localhost:5001/api/reservation", {
       method: "POST",
@@ -21,18 +66,39 @@ function Reservation() {
       },
       body: JSON.stringify(reservation),
     })
-    .then((res) => {
-      return res.text();
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+    setReservation({
+      numberofguests: "",
+      Guestsname: "",
+      Email: "",
+      Phonenumber: "",
+    });
+  }
+  async function updateReservation(e) {
+    e.preventDefault();
+
+    await fetch("http://localhost:5001/api/updateReservation?id=" + id, {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(reservation),
     })
-    .then ((r) => {
-        alert(r)
-    })
+      .then((res) => {
+        console.log(res.text());
+      })
       .catch((err) => console.log(err));
   }
+  //this function is to post the data
+
   return (
     <div className="reg">
-      <form onSubmit={(e) => saveSubmit(e)}>
-        <b>Reservation form</b>
+      <form onSubmit={(e) => (id ? updateReservation(e) : saveSubmit(e))}>
+        <h2> {id ? "Update " : "Create"} a Reservation</h2>
         <br />
         <label>
           {" "}
@@ -82,8 +148,10 @@ function Reservation() {
           <input
             type="Number"
             name="Phonenumber"
-            value={reservation.phno}
-            onChange={(e) => setReservation({ ...reservation, Phonenumber: e.target.value })}
+            value={reservation.Phonenumber}
+            onChange={(e) =>
+              setReservation({ ...reservation, Phonenumber: e.target.value })
+            }
             required
           />
         </label>
@@ -91,20 +159,58 @@ function Reservation() {
         <button type="submit" value="Submit">
           Reservation
         </button>
+        <br />
       </form>
+      <button type="submit" onClick={(e) => getData(e)}>
+        FETCH UPDATED DATA
+      </button>
       <div>
-  <select class="browser-default custom-select" id="venflows">
-    <option value="Date">ALL</option>
-    <option value="Date">Today</option>
-    <option value="Date">Tomorrow</option>
-  </select>
-</div>
-<button type="button"
-onclick="document.getElementById('date_time_button').innerHTML = Date()">Check</button>
-<p id="date_time_button"></p>
-
+        {isMessage.map((reservation, index) => (
+          <div
+            className="messages"
+            style={{ margin: "20px" }}
+            key={reservation._id}
+          >
+            <div className="messages__show">
+              <span>
+                <p>{reservation.numberofguests}</p>
+                <p>{reservation.Guestsname}</p>
+                <p>{reservation.Email}</p>
+                <p>{reservation.Phonenumber}</p>
+              </span>
+            </div>
+            <div>
+              <button
+                className="messages__button"
+                type="submit"
+                onClick={async () => {
+                  await deleteMessage(
+                    reservation._id,
+                    reservation.numberofguests,
+                    reservation.Guestsname,
+                    reservation.Email,
+                    reservation.Phonenumber
+                  );
+                  setMessageData(reservation);
+                }}
+              >
+                DELETE
+              </button>
+              <button
+                className="messages__button"
+                type="submit"
+                onClick={async () => {
+                  setID(reservation._id);
+                  await setReservation(reservation);
+                  setMessageData(reservation);
+                }}
+              >
+                UPDATE
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
-
-export default Reservation;

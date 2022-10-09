@@ -6,47 +6,35 @@ import MessageBox from "./MessageBox";
 export default function Message() {
   const [isMessage, setIsMessage] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
-  const [messagedata, setMessageData] = useState({});
-  const [id,setID]=useState("");
+  const [messageData, setmessageData] = useState({});
+  const [updateData, setupdateData] = useState({
+    title: "",
+    message: "",
+  });
+  const [id, setId] = useState("");
 
   useEffect(() => {
-    
     fetch("http://localhost:5001/api/getMessages")
       .then((response) => response.json())
       .then((res) => setIsMessage(res))
       .catch((err) => console.log("Error in sending messages", err));
-  }, [messagedata]);
+  }, [messageData]);
 
-
-  async function updateMessage(id, title, message) {
-    console.log("update", id);
-    setMessageData({ id, title, message });
-    let editMessage = isMessage.find((ele) => ele.id !== id);
-    console.log(editMessage);
-    console.log("message", messagedata);
-    // await fetch("http://localhost:5001/api/updateMessages", {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(isMessage),
-    // })
-    //   .then((response) => response.text())
-    //   .then((res) => alert(res))
-    //   .catch((err) => console.log("Error in sending messages", err));
-
-  }, []);
-  async function deleteMessage(id) {
+  async function deleteMessage(id, title, message) {
     const url = "http://localhost:5001/api/delete";
-    await fetch(url+"/"+id).then((res)=> console.log("delete")).catch((err) => console.log(err));
-    window.location.reload();
+    await fetch(url + "/" + id)
+      .then((res) => res.text())
+      .then((res) => {
+        alert(res);
+      })
+      .catch((err) => console.log(err));
+    setmessageData([title, message]);
   }
   async function updateMessage(id, title, message) {
     console.log("update", id);
     setId(id);
-
     setShowPopup(true);
+    setupdateData({ title: title, message: message });
   }
 
   return (
@@ -54,29 +42,28 @@ export default function Message() {
       {showPopup ? (
         <MessageBox
           id={id}
-          setID={setID}
+          setID={setId}
           showPopup={showPopup}
           setShowPopup={setShowPopup}
-          setMessageData={setMessageData}
-
+          data={updateData}
+          setmessageData={setmessageData}
         />
       ) : (
         ""
       )}
-      {isMessage.map((mess, index) => (
+      {isMessage.map((mess) => (
         <div className="messages" style={{ margin: "20px" }} key={mess._id}>
           <div className="messages__show">
             <span>
               <p>{mess.title}</p>
-              <p>{mess.ingr1}</p>
-             
+              <p>{mess.message}</p>
             </span>
           </div>
           <div>
             <button
               className="messages__button"
               type="submit"
-              //onClick={() => deleteMessage(id,mealName,ingr1,ingr2,type,price,courseMeal)}
+              onClick={() => updateMessage(mess._id, mess.title, mess.message)}
             >
               Update
             </button>
