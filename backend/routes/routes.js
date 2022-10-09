@@ -10,25 +10,20 @@ const router = express.Router();
 router.post("/meal", (req, res) => {
   const newMeal = new mealSchema(req.body);
   Register.find({ email: req.body.email }, function (err, docs) {
-    console.log(req.body);
-    newMeal.save();
-    /* if (!docs.length) {
+   // console.log(req.body);
+   // newMeal.save();
+     if (!docs.length) {
         newMeal.save((err, data) => {
           console.log("Analyzing Data...");
           if (data) {
-            console.log("Your data has been successfully saved.");
-            res.send("Successful booking");
-          } else {
-            console.log("Something went wrong while saving data.");
-            console.log(err);
+            res.send("Successful meal booking");
+          } else {   
             res.status(404).send("Something went wrong while saving data.");
           }
         });
-      } 
-      else {
-        res.status(404).send("The booking from this email already exist");
+      } else{
+        res.status(404).send("booking from email already exists");
       }
-*/
     
   });
 });
@@ -51,10 +46,10 @@ router.post("/meal", (req, res) => {
      });
     
   });
-  router.put("/updateMeal",(req,res)=>{
+  router.patch("/updateMeal",(req,res)=>{
     const id=req.query.id;
-    console.log(id);
-    console.log(req.body);
+    
+    
     const { data } = req.body;
     console.log (data);
     mealSchema.findByIdAndUpdate({_id:id},req.body,(err,docs) =>{
@@ -62,13 +57,13 @@ router.post("/meal", (req, res) => {
       else res.send("updated data");
     })
   })
-  router.post("/meal", (req, res) => {
+  /*router.post("/meal", (req, res) => {
     console.log("\nMeal page");
     console.log(req.body);
     const n = new mealSchema(req.body);
     n.save();
     res.send("Received meal form");
-  });
+  });*/
 
   router.post("/register", (req, res) => {
     if (req.body.phno.length == 10) {
