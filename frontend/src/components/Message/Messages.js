@@ -1,18 +1,41 @@
 import { useState, useEffect } from "react";
 import "./message.scss";
 import MessageBox from "./MessageBox";
+//import GetMeal from "../getMeal";
 
 export default function Message() {
   const [isMessage, setIsMessage] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
-  const [data, setData] = useState({});
-  const [id,setId] = useState("")
+  const [messagedata, setMessageData] = useState({});
+  const [id,setID]=useState("");
+
   useEffect(() => {
-    // Update the messge using the browser API
+    
     fetch("http://localhost:5001/api/getMessages")
       .then((response) => response.json())
       .then((res) => setIsMessage(res))
       .catch((err) => console.log("Error in sending messages", err));
+  }, [messagedata]);
+
+
+  async function updateMessage(id, title, message) {
+    console.log("update", id);
+    setMessageData({ id, title, message });
+    let editMessage = isMessage.find((ele) => ele.id !== id);
+    console.log(editMessage);
+    console.log("message", messagedata);
+    // await fetch("http://localhost:5001/api/updateMessages", {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(isMessage),
+    // })
+    //   .then((response) => response.text())
+    //   .then((res) => alert(res))
+    //   .catch((err) => console.log("Error in sending messages", err));
+
   }, []);
   async function deleteMessage(id) {
     const url = "http://localhost:5001/api/delete";
@@ -21,11 +44,8 @@ export default function Message() {
   }
   async function updateMessage(id, title, message) {
     console.log("update", id);
-    // setData({ id, title, message });
-    // let editMessage = isMessage.find((ele) => ele.id !== id);
-    // console.log(editMessage);
-    // console.log("data", data);
     setId(id);
+
     setShowPopup(true);
   }
 
@@ -34,11 +54,11 @@ export default function Message() {
       {showPopup ? (
         <MessageBox
           id={id}
-          setId = {setId}
+          setID={setID}
           showPopup={showPopup}
           setShowPopup={setShowPopup}
-          data={data}
-          setData = {setData}
+          setMessageData={setMessageData}
+
         />
       ) : (
         ""
@@ -47,15 +67,16 @@ export default function Message() {
         <div className="messages" style={{ margin: "20px" }} key={mess._id}>
           <div className="messages__show">
             <span>
-              <h3>{mess.title}</h3>
-              <p>{mess.message}</p>
+              <p>{mess.title}</p>
+              <p>{mess.ingr1}</p>
+             
             </span>
           </div>
           <div>
             <button
               className="messages__button"
               type="submit"
-              onClick={() => updateMessage(mess._id, mess.title, mess.message)}
+              //onClick={() => deleteMessage(id,mealName,ingr1,ingr2,type,price,courseMeal)}
             >
               Update
             </button>

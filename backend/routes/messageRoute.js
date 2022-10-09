@@ -1,6 +1,7 @@
 import messageModel from "../mongo/messageSchema.js";
 import express from "express";
-//import { ObjectId } from "mongoose";
+import { ObjectId } from "mongoose";
+
 
 const router = express.Router();
 
@@ -19,6 +20,7 @@ router.post("/postMessages", (request, response) => {
       if(err) response.send("Posting error : "+err)
       else response.send("postMessages") });
 });
+
 
 router.get("/getMessages", (request, response) => {
   console.log(request.body)
@@ -45,9 +47,23 @@ router.get('/delete/(:id)', function(req, res, next) {
     if (!err) {
         res.send('deleted');
     } else {
-        console.log('Failed to Delete user Details: ' + err);
+        console.log('Failed to Delete meal Details: ' + err);
     }
   });
+});
+router.post('/updateMessages',(req, res) => {
+  messageModel.updateOne({ _id:req.params.id }, {$set: {
+     title: req.body.title,
+     message:req.body.message,
+  }
+  }, function (err, result) {
+       if (err) {
+       console.log(err);
+     } else {
+      console.log("Updated successfully");
+      res.send('Updated');
+  }
+ });
 });
 
 
