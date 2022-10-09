@@ -103,40 +103,23 @@ async function updateMessage(id,numberofguests,Guestsname,Email,Phonenumber) {
   let editReservation = editReservation.find((ele) => ele.id !== id);
   console.log(editReservation);
   console.log("reservation", messagedata);
-   await fetch("http://localhost:5001/api/updateMessage", {
-       method: "PATCH",
-       headers: {
-         Accept: "application/json",
-         "Content-Type": "application/json",
-       },
-       body: JSON.stringify(reservation),
-     })
-       .then((response) => response.text())
-       .then((res) => alert(res))
-       .catch((err) => console.log("Error in sending messages", err));
+   //await fetch("http://localhost:5001/api/updateMessage", {
+   //    method: "PATCH",
+   //    headers: {
+   //      Accept: "application/json",
+   //      "Content-Type": "application/json",
+   //    },
+   //    body: JSON.stringify(isMessage),
+   //  })
+   //    .then((response) => response.text())
+   //    .then((res) => alert(res))
+   //    .catch((err) => console.log("Error in sending messages", err));
   setShowPopup(true);
 }
-  async function callReservationApi() {
-    await fetch("http://localhost:5001/api/reservation", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(reservation),
-    })
-    .then((res) => {
-      return res.text();
-    })
-    .then ((r) => {
-        alert(r)
-    })
-      .catch((err) => console.log(err));
-  }
   return (
     <div className="reg">
       <form onSubmit={(e) => saveSubmit(e)} >
-        <b>Reservation form</b>
+        <h1>Reservation form</h1>
         <br />
         <label>
           {" "}
