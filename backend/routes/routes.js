@@ -77,7 +77,7 @@ router.post("/register", (req, res) => {
        else response.send("Deleted data");
      });
   });
-  router.put("/updateReservation",(req,res)=>{
+  router.patch("/updateReservation",(req,res)=>{
     const id=req.query.id;
     console.log(id);
     console.log(req.body);

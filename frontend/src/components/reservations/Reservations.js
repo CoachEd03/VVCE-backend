@@ -27,7 +27,7 @@ const [reservation, setReservation] = useState({
     console.log(reservation);
     try{
       await fetch("http://localhost:5001/api/updateReservation?id="+id,{
-        method:"PUT",
+        method:"PATCH",
         headers:{
           Accept:"application/json",
           "Content-Type":"application?json",
@@ -42,7 +42,7 @@ const [reservation, setReservation] = useState({
   }catch (err){
     console.log("Some error",err);
   }
- // setMessageData([id,mealName,ingr1,ingr2,type,price,courseMeal]);
+ // setMessageData([id,numberofguests,Guestsname,Email,Phonenumber]);
 }
 async function deleteMessage(id,numberofguests,Guestsname,Email,Phonenumber) {
   console.log(id,numberofguests,Guestsname,Email,Phonenumber);
