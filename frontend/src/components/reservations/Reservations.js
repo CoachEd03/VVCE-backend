@@ -21,7 +21,7 @@ const [reservation, setReservation] = useState({
   }
 
 
-  async function updateReservation(e) {
+  async function updateReservation(id,numberofguests,Guestsname,Email,Phonenumber,e) {
     e.preventDefault()
 
     console.log(reservation);
@@ -42,7 +42,7 @@ const [reservation, setReservation] = useState({
   }catch (err){
     console.log("Some error",err);
   }
- // setMessageData([id,numberofguests,Guestsname,Email,Phonenumber]);
+  setReservation([id,numberofguests,Guestsname,Email,Phonenumber]);
 }
 async function deleteMessage(id,numberofguests,Guestsname,Email,Phonenumber) {
   console.log(id,numberofguests,Guestsname,Email,Phonenumber);
@@ -123,7 +123,7 @@ async function updateMessage(id,numberofguests,Guestsname,Email,Phonenumber) {
         <br />
         <label>
           {" "}
-          numberofguests:{" "}
+          Number of Guests:{" "}
           <input
             type="Number"
             name="numberofguest"
@@ -137,7 +137,7 @@ async function updateMessage(id,numberofguests,Guestsname,Email,Phonenumber) {
         <br />
         <label>
           {" "}
-          Guestsname:{" "}
+          Guests Name:{" "}
           <input
             type="String"
             name="Guestsname"
@@ -165,7 +165,7 @@ async function updateMessage(id,numberofguests,Guestsname,Email,Phonenumber) {
         <br />
         <label>
           {" "}
-          Phonenumber :{" "}
+          Phone Number :{" "}
           <input
             type="Number"
             name="Phonenumber"
@@ -215,70 +215,6 @@ async function updateMessage(id,numberofguests,Guestsname,Email,Phonenumber) {
       ))}
     </div>
     <br />
-    
-    <div className="message">
-    <form onSubmit={(e) =>id?updateReservation(e): saveSubmit(e) }>
-        <h2>
-          <i>- - - - - Update - - - - - </i>
-        </h2>
-        <label>
-          {" "}
-          numberofguests:{" "}
-          <input
-            type="Number"
-            name="numberofguest"
-            value={reservation.numberofguests}
-            onChange={(e) =>
-              setReservation({ ...reservation, numberofguests: e.target.value })
-            }
-            required
-          />
-        </label>
-        <br />
-        <label>
-          {" "}
-          Guestsname:{" "}
-          <input
-            type="String"
-            name="Guestsname"
-            value={reservation.Guestsname}
-            onChange={(e) =>
-              setReservation({ ...reservation, Guestsname: e.target.value })
-            }
-            required
-          />
-        </label>
-        <br />
-        <label>
-          {" "}
-          Email:{" "}
-          <input
-            type="email"
-            name="email"
-            value={reservation.Email}
-            onChange={(e) =>
-              setReservation({ ...reservation, Email: e.target.value })
-            }
-            required
-          />
-        </label>
-        <br />
-        <label>
-          {" "}
-          Phonenumber :{" "}
-          <input
-            type="Number"
-            name="Phonenumber"
-            value={reservation.phno}
-            onChange={(e) => setReservation({ ...reservation, Phonenumber: e.target.value })}
-            required
-          />
-        </label>
-        <button type="submit" className="message__flex__button">
-          Submit
-        </button>
-      </form>
-    </div>
     </div>
   );
 }
