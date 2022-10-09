@@ -1,5 +1,4 @@
 import express from "express";
-import mealSchema from "../mongo/mealSchema.js";
 import ReservationSchema from "../mongo/reservationSchema.js";
 import Register from "../mongo/registerSchema.js";
 import message from "../mongo/messageSchema.js";
@@ -12,9 +11,9 @@ router.get("/", (req, res) => {
 
 router.post("/register", (req, res) => {
   console.log(req.body);
-  const n = new mealSchema(req.body);
+  const n = new ReservationSchema(req.body);
   n.save();
-  res.send("Received meal form");});
+  res.send("Received reservation form");});
 
  router.post("/register", (req, res) => {
     if (req.body.phno.length == 10) {
@@ -60,6 +59,32 @@ router.post("/register", (req, res) => {
 
   });
 
+  router.get("/reservation", (req, res) => {
+    ReservationSchema.find(function (err, docs) {
+      if (!err) {
+        res.send(docs);
+      }
+      else {
+        res.status(404).send("Something went wrong while saving data.");
+      }
+    })
+  });
+  router.delete("/deleteReservation", (request, response) => {
+     const id = request.query.id;
+    console.log("deleted"+id);
+     ReservationSchema.findByIdAndRemove({ _id: id }, (err, docs) => {
+       if (err) response.send(" Error in saving data " + err);
+       else response.send("Deleted data");
+     });
+  });
+  router.delete("/updateReservation", (request, response) => {
+    const id = request.query.id;
+   console.log("Update"+id);
+    ReservationSchema.findByIdAndUpdate({ _id: id }, (err, docs) => {
+      if (err) response.send(" Error in saving data " + err);
+      else response.send("Updated data");
+    });
+ });
   router.post("/reservation", (req, res) => {
     const newReservation = new ReservationSchema(req.body);
     Register.find({ Email: req.body.email }, function (err, docs) {

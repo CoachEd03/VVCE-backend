@@ -14,6 +14,11 @@ export default function Message() {
       .catch((err) => console.log("Error in sending messages", err));
   }, []);
 
+  async function deleteMessage(id) {
+    const url = "http://localhost:5001/api/deleteMessages";
+    await fetch(url + "?id=" + id).then(() => console("delete")).catch
+  }
+
   async function updateMessage(id, title, message) {
     console.log("update", id);
     setData({ id, title, message });
@@ -64,6 +69,7 @@ export default function Message() {
             <button
               className="messages__button"
               style={{ backgroundColor: "rgb(173, 30, 30)" }}
+              onClick={() => deleteMessage(mess._id)}
             >
               Delete
             </button>
