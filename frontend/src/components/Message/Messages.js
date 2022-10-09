@@ -8,6 +8,7 @@ export default function Message() {
   const [showPopup, setShowPopup] = useState(false);
   const [messagedata, setMessageData] = useState({});
   const [id,setID]=useState("");
+
   useEffect(() => {
     
     fetch("http://localhost:5001/api/getMessages")
@@ -16,26 +17,6 @@ export default function Message() {
       .catch((err) => console.log("Error in sending messages", err));
   }, [messagedata]);
 
-  async function deleteMessage(id,mealName,ingr1,ingr2,type,price,courseMeal) {
-    console.log(id,mealName,ingr1,ingr2,type,price,courseMeal);
-    try{
-      await fetch("http://localhost:5001/api/deleteMessage?id="+id,{
-        method:"DELETE",
-        headers:{
-          Accept:"application/json",
-          "Content-Type":"application?json",
-        },
-      }).then((res)=> 
-      console
-      .log(res.text())
-      .catch((err) => console.log("error:"+err))
-      );
-   
-  }catch (err){
-    console.log("Some error",err);
-  }
-  setMessageData([id,mealName,ingr1,ingr2,type,price,courseMeal]);
-}
 
   async function updateMessage(id, title, message) {
     console.log("update", id);
@@ -54,6 +35,17 @@ export default function Message() {
     //   .then((response) => response.text())
     //   .then((res) => alert(res))
     //   .catch((err) => console.log("Error in sending messages", err));
+
+  }, []);
+  async function deleteMessage(id) {
+    const url = "http://localhost:5001/api/delete";
+    await fetch(url+"/"+id).then((res)=> console.log("delete")).catch((err) => console.log(err));
+    window.location.reload();
+  }
+  async function updateMessage(id, title, message) {
+    console.log("update", id);
+    setId(id);
+
     setShowPopup(true);
   }
 
@@ -63,9 +55,10 @@ export default function Message() {
         <MessageBox
           id={id}
           setID={setID}
-          //showPopup={showPopup}
+          showPopup={showPopup}
           setShowPopup={setShowPopup}
           setMessageData={setMessageData}
+
         />
       ) : (
         ""
@@ -90,6 +83,7 @@ export default function Message() {
             <button
               className="messages__button"
               style={{ backgroundColor: "rgb(173, 30, 30)" }}
+              onClick={() => deleteMessage(mess._id)}
             >
               Delete
             </button>

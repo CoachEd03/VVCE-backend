@@ -70,6 +70,7 @@ router.post("/meal", (req, res) => {
     res.send("Received meal form");
   });
 
+
   router.post("/register", (req, res) => {
     if (req.body.phno.length == 10) {
       Register.find({ email: req.body.email }, function (err, docs) {
@@ -77,17 +78,13 @@ router.post("/meal", (req, res) => {
           console.log(err);
           res.send("Something went wrong" + err);
         } else {
-          if (docs.length == 0) {
-            const n = new Register(req.body);
-            n.save();
-            res.send("Register successfull ");
-          } else {
-            res.send("Email exists");
-          }
+          console.log("Something went wrong while saving data.");
+          console.log(err);
+          res.status(404).send("Something went wrong while saving data.");
         }
       });
     } else {
-      res.send("invalid phone number");
+      res.status(404).send("The booking from this email already exist");
     }
   });
 
@@ -105,7 +102,7 @@ router.post("/meal", (req, res) => {
           resu = "invalid email";
         } else {
           if (docs[0].pass === req.body.pass) {
-            console.log("login successfull");
+            console.log("login successfull"+"\t"+docs[0]._id);
             resu = "login successfull";
           } else {
             console.log("login password error");
@@ -115,20 +112,14 @@ router.post("/meal", (req, res) => {
       }
       res.send(resu);
     });
-    //   Register.find({email: req.body.email}, function (err, data) {
-    //     if (!err) {
-    //         res.render("retrieve", { email: req.body.email });
-    //     } else {
-    //       res.render("error");
-    //     }
-    // }).clone().catch(function(err){ console.log(err)})
+
   });
 
   router.post("/reservation", (req, res) => {
     const newReservation = new ReservationSchema(req.body);
     Register.find({ Email: req.body.email }, function (err, docs) {
       console.log(docs.length);
-      if (!docs.length) {
+      if (docs.length) {
         newReservation.save((err, data) => {
           console.log("Analyzing Data...");
           if (data) {
@@ -146,14 +137,6 @@ router.post("/meal", (req, res) => {
     });
   });
 
-  router.post("/messages", (req, res) => {
-    const sample = new message({
-      title: "test",
-      message: "test",
-    })
-    sample.save();
-  });
 
 
-
-export default router;
+  export default router;

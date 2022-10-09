@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 
-//import Reservation from "../../frontend/src/components/Reservations";
-
 const user = mongoose.Schema({
   numberofguests: Number,
   Guestsname: String,
@@ -15,6 +13,7 @@ const user = mongoose.Schema({
     type: Date,
     default: new Date(),
   },
+  
 });
 
 const ReservationSchema = mongoose.model("Reservation", user);
