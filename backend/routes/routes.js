@@ -6,8 +6,11 @@ import message from "../mongo/messageSchema.js";
 
 const router = express.Router();
 
-router.post("/meal", (req, res) => {
-  console.log("\nMeal page");
+router.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+router.post("/register", (req, res) => {
   console.log(req.body);
   const n = new mealSchema(req.body);
   n.save();
@@ -20,17 +23,13 @@ router.post("/meal", (req, res) => {
           console.log(err);
           res.send("Something went wrong" + err);
         } else {
-          if (docs.length == 0) {
-            const n = new Register(req.body);
-            n.save();
-            res.send("Register successfull ");
-          } else {
-            res.send("Email exists");
-          }
+          console.log("Something went wrong while saving data.");
+          console.log(err);
+          res.status(404).send("Something went wrong while saving data.");
         }
       });
     } else {
-      res.send("invalid phone number");
+      res.status(404).send("The booking from this email already exist");
     }
   });
 
@@ -58,13 +57,7 @@ router.post("/meal", (req, res) => {
       }
       res.send(resu);
     });
-    //   Register.find({email: req.body.email}, function (err, data) {
-    //     if (!err) {
-    //         res.render("retrieve", { email: req.body.email });
-    //     } else {
-    //       res.render("error");
-    //     }
-    // }).clone().catch(function(err){ console.log(err)})
+
   });
 
   router.post("/reservation", (req, res) => {
@@ -98,4 +91,4 @@ router.post("/meal", (req, res) => {
 // });
 
 
-  export default router
+  export default router;
