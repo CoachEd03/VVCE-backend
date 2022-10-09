@@ -21,9 +21,12 @@ function Reservation() {
       },
       body: JSON.stringify(reservation),
     })
-      .then((res) => {
-        console.log(res);
-      })
+    .then((res) => {
+      return res.text();
+    })
+    .then ((r) => {
+        alert(r)
+    })
       .catch((err) => console.log(err));
   }
   return (
@@ -89,6 +92,17 @@ function Reservation() {
           Reservation
         </button>
       </form>
+      <div>
+  <select class="browser-default custom-select" id="venflows">
+    <option value="Date">ALL</option>
+    <option value="Date">Today</option>
+    <option value="Date">Tomorrow</option>
+  </select>
+</div>
+<button type="button"
+onclick="document.getElementById('date_time_button').innerHTML = Date()">Check</button>
+<p id="date_time_button"></p>
+
     </div>
   );
 }
