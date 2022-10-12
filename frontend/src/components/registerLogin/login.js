@@ -26,6 +26,7 @@ function Login() {
       .then((r) => {
         if (r === "login successfull") {
           setIsAuth(true);
+          alert(r);
         } else {
           alert(r);
         }

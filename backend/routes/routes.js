@@ -54,7 +54,9 @@ router.post("/register", (req, res) => {
       if (err) {
         res.send("Something went wrong" + err);
       } else {
-        res.status(404).send("Something went wrong while saving data.");
+        const n = new Register(req.body);
+        n.save();
+        res.send("Registered");
       }
     });
   } else {
