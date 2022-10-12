@@ -6,9 +6,9 @@ export default function CreateMeal() {
   const [isMessage, setIsMessage] = useState([]);
   const [id, setID] = useState("");
 
-  const ingredientList = ["----", "Chicken", "Mutton", "Paneer", "fish", "egg"];
+  const ingredientList = ["----", "Chicken", "Mixed vegetables","Mutton", "Paneer", "fish", "egg"];
 
-  const sauces = ["----", "chilly sauce", "hot sauce"];
+  const sauces = ["----", "chilly sauce", "hot sauce","tomato sauce","chutney"];
   const mealType = ["----", "veg", "non-veg"];
   const course = ["----", "appetizer", "starters", "Maincourse", "desserts"];
   const [meal, setMeal] = useState({
